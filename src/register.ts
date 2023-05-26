@@ -43,7 +43,7 @@ vclSetting.addSubcommandGroup((subcommandGroup: SlashCommandSubcommandGroupBuild
         .addSubcommand((subcommand: SlashCommandSubcommandBuilder) =>
             subcommand
                 .setName('setting')
-                .setDescription('VCロックの全般設定ができえます。')
+                .setDescription('VCロックの全般設定ができます。')
                 .addBooleanOption((option: SlashCommandBooleanOption) =>
                     option.setName('機能を有効にする').setDescription('有効にするにはTrueを選択').setRequired(false),
                 )

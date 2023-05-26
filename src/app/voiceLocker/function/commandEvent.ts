@@ -87,9 +87,17 @@ export async function voiceLockerCommand(interaction: ChatInputCommandInteractio
 
     // "channelSetting.messageDeletionTime" === null or -1(use Global) -> use "GlobalSetting.messageDeletionTime"
     if (notExists(lockChannel) || notExists(lockChannel.messageDeletionTime) || lockChannel.messageDeletionTime === -1) {
-        await sleep(vclSetting.messageDeletionTime);
+        if (vclSetting.messageDeletionTime === 0) {
+            return;
+        } else {
+            await sleep(vclSetting.messageDeletionTime);
+        }
     } else {
-        await sleep(lockChannel.messageDeletionTime);
+        if (lockChannel.messageDeletionTime === 0) {
+            return;
+        } else {
+            await sleep(lockChannel.messageDeletionTime);
+        }
     }
 
     // delete message after messageDeletionTime
