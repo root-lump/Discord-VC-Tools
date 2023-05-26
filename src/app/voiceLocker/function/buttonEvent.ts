@@ -2,6 +2,7 @@ import { ButtonInteraction } from 'discord.js';
 import { searchMemberById } from '../../manager/memberManager';
 import { createButtons, createEmbed, getVoiceChannelState } from './components';
 import { assertExistCheck } from '../../common/exists';
+import { logger } from '../../common/logger';
 
 /*
  * Action when button is pressed
@@ -84,7 +85,7 @@ export async function voiceLockerUpdate(interaction: ButtonInteraction) {
                     fetchReply: true,
                 })
                 .catch((error) => {
-                    console.error(error);
+                    logger.error(error);
                 });
             return;
         }
@@ -97,6 +98,6 @@ export async function voiceLockerUpdate(interaction: ButtonInteraction) {
             fetchReply: true,
         })
         .catch((error) => {
-            console.error(error);
+            logger.error(error);
         });
 }

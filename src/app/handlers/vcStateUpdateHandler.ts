@@ -1,5 +1,6 @@
 import { VoiceState } from 'discord.js';
 import { disableLimit, showEmbed } from '../voiceLocker/function/vcStateEvent';
+import { logger } from '../common/logger';
 
 export async function call(oldState: VoiceState, newState: VoiceState) {
     try {
@@ -17,6 +18,6 @@ export async function call(oldState: VoiceState, newState: VoiceState) {
             await disableLimit(oldState);
         }
     } catch (error) {
-        console.error(error);
+        logger.error(error);
     }
 }

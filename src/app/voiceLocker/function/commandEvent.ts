@@ -5,6 +5,7 @@ import { vclChannelSettingService } from '../../dbServices/vclChannelSettingServ
 import { vclGlobalSettingService } from '../../dbServices/vclGlobalSettingService';
 import { searchMemberById } from '../../manager/memberManager';
 import { createButtons, createEmbed, getVoiceChannelState } from './components';
+import { logger } from '../../common/logger';
 
 /*
  * behavior when a slash command is typed
@@ -82,7 +83,7 @@ export async function voiceLockerCommand(interaction: ChatInputCommandInteractio
             fetchReply: true,
         })
         .catch((error) => {
-            console.error(error);
+            logger.error(error);
         });
 
     // "channelSetting.messageDeletionTime" === null or -1(use Global) -> use "GlobalSetting.messageDeletionTime"

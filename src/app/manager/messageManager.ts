@@ -1,6 +1,7 @@
 import { Guild } from 'discord.js';
 import { searchChannelById } from './channelManager';
 import { exists } from '../common/exists';
+import { logger } from '../common/logger';
 
 /**
  * Search message by ID. If message is not exist, return null.
@@ -17,7 +18,7 @@ export async function searchMessageById(guild: Guild, channelId: string, message
             message = await channel.messages.fetch(messageId);
         } catch (error) {
             message = null;
-            console.warn('message missing');
+            logger.warn('message missing');
         }
     }
     return message;

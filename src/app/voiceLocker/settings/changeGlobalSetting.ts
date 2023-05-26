@@ -1,6 +1,7 @@
 import { ChatInputCommandInteraction } from 'discord.js';
 import { assertExistCheck, exists, notExists } from '../../common/exists';
 import { vclGlobalSettingService } from '../../dbServices/vclGlobalSettingService';
+import { logger } from '../../common/logger';
 
 export async function changeVclGlobalSetting(interaction: ChatInputCommandInteraction) {
     try {
@@ -43,11 +44,11 @@ export async function changeVclGlobalSetting(interaction: ChatInputCommandIntera
             await vclGlobalSettingService.updateSetting(globalSetting);
         } catch (error) {
             interaction.channel.send('設定変更中にエラーが発生しました。');
-            console.error(error);
+            logger.error(error);
         }
 
         await interaction.editReply('設定を変更しました。');
     } catch (error) {
-        console.error(error);
+        logger.error(error);
     }
 }
