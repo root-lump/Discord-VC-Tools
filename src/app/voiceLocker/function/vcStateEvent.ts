@@ -6,6 +6,7 @@ import { vclGlobalSettingService } from '../../dbServices/vclGlobalSettingServic
 import { createButtons, createEmbed, getVoiceChannelState } from './components';
 import { sleep } from '../../common/sleep';
 import { searchMessageById } from '../../manager/messageManager';
+import { logger } from '../../common/logger';
 
 export async function disableLimit(voiceState: VoiceState) {
     const vclSetting = await vclGlobalSettingService.getSetting(voiceState.guild.id);
@@ -91,6 +92,6 @@ export async function showEmbed(voiceState: VoiceState) {
             await checkPanelMessage.delete();
         }
     } catch (error) {
-        console.error(error);
+        logger.error(error);
     }
 }

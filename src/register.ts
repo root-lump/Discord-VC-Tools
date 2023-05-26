@@ -12,6 +12,7 @@ import {
     SlashCommandSubcommandBuilder,
     SlashCommandSubcommandGroupBuilder,
 } from 'discord.js';
+import { logger } from './app/common/logger';
 
 const vcTools = new SlashCommandBuilder()
     .setName(commandNames.vcTools)
@@ -132,8 +133,8 @@ export async function registerSlashCommands() {
         .put(Routes.applicationCommands(botId), {
             body: commands,
         })
-        .then(() => console.info('Slash commands registered.'))
+        .then(() => logger.info('Slash commands registered.'))
         .catch((error) => {
-            console.error(error);
+            logger.error(error);
         });
 }

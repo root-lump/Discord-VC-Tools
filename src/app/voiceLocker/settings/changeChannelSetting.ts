@@ -3,6 +3,7 @@ import { assertExistCheck, exists, notExists } from '../../common/exists';
 import { vclChannelSettingService } from '../../dbServices/vclChannelSettingService';
 import { searchChannelById } from '../../manager/channelManager';
 import { vclGlobalSettingService } from '../../dbServices/vclGlobalSettingService';
+import { logger } from '../../common/logger';
 
 export async function changeVclChannelSetting(interaction: ChatInputCommandInteraction) {
     try {
@@ -79,11 +80,11 @@ export async function changeVclChannelSetting(interaction: ChatInputCommandInter
             await vclChannelSettingService.updateChannelSetting(lockChannel);
         } catch (error) {
             interaction.channel.send('設定変更中にエラーが発生しました。');
-            console.error(error);
+            logger.error(error);
         }
 
         await interaction.editReply('設定を変更しました。');
     } catch (error) {
-        console.error(error);
+        logger.error(error);
     }
 }

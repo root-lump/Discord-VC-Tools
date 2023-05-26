@@ -3,6 +3,7 @@ import * as buttonHandler from './app/handlers/buttonHandler';
 import * as commandHandler from './app/handlers/commandHandler';
 import * as vcStateUpdateHandler from './app/handlers/vcStateUpdateHandler';
 import { registerSlashCommands } from './register';
+import { logger } from './app/common/logger';
 
 const client = new Client({
     intents: [
@@ -22,10 +23,10 @@ client.login(process.env.DISCORD_BOT_TOKEN);
 
 client.on('ready', async () => {
     try {
-        console.info(`Logged in as ${client.user?.tag}.`);
+        logger.info(`Logged in as ${client.user?.tag}.`);
         await registerSlashCommands();
     } catch (error) {
-        console.error(error);
+        logger.error(error);
     }
 });
 
@@ -45,7 +46,7 @@ client.on('interactionCreate', (interaction: Interaction<CacheType>) => {
             commandHandler.call(interaction);
         }
     } catch (error) {
-        console.error(error);
+        logger.error(error);
     }
 });
 
@@ -54,9 +55,9 @@ client.on('voiceStateUpdate', (oldState: VoiceState, newState: VoiceState) => {
 });
 
 client.on(Events.ShardError, (error: Error) => {
-    console.error('A websocket connection encountered an error:', error);
+    logger.error('A websocket connection encountered an error:', error);
 });
 
 process.on('unhandledRejection', (error: Error) => {
-    console.error('Unhandled promise rejection:', error);
+    logger.error('Unhandled promise rejection:', error);
 });

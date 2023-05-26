@@ -1,4 +1,5 @@
 import { Guild } from 'discord.js';
+import { logger } from '../common/logger';
 
 /**
  * Search channel by ID. If channel is not exist, return null.
@@ -11,7 +12,7 @@ export async function searchChannelById(guild: Guild, channelId: string) {
         // fetch(channelId): fetch if not in cache
         return await guild.channels.fetch(channelId);
     } catch (error) {
-        console.warn('channel missing');
+        logger.warn('channel missing');
         return null;
     }
 }
